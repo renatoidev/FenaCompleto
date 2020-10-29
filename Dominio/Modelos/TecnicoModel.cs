@@ -1,13 +1,16 @@
 ﻿using Dominio.Enums;
 using System;
 
-namespace Dominio.Entidades
+namespace Dominio.Modelos
 {
-    public class Estagiario : Entity
+    public class TecnicoModel
     {
+        public TecnicoModel()
+        {
+        }
+
         public string Nome { get; set; }
         public ECargo Cargo { get; set; }
-        public Analista Supervisor { get; set; }
         public Guid SupervisorId { get; set; }
     }
 }

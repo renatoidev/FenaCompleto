@@ -1,7 +1,6 @@
 ﻿using Dominio.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Dominio.Modelos
 {
@@ -9,8 +8,10 @@ namespace Dominio.Modelos
     {
         public GerenteModel() { }
 
+        public Guid Id { get; set; }
         public string Nome { get; set; }
         public ECargo Cargo { get; set; } = ECargo.Gerente;
+        public List<AnalistaModel> Analistas { get; set; } = new List<AnalistaModel>();
 
     }
 }

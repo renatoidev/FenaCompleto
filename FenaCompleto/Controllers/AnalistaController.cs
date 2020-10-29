@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Dominio.Entidades;
-using Dominio.Enums;
 using Dominio.Interfaces;
 using Dominio.Modelos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FenaCompleto.Controllers
@@ -18,11 +13,11 @@ namespace FenaCompleto.Controllers
         [HttpPost]
         [Route("cadastrarAnalista")]
         public IActionResult CadastrarAnalista(
-            [FromServices] IAnalista repositorio,
-            [FromServices] IGerente repositorioGerente,
+            [FromServices] IAnalista repositorioAnalistas,
+            [FromServices] IGerente repositorioGerentes,
             [FromBody] AnalistaModel model)
         {
-            var supervisor = repositorioGerente.GetById(model.SupervisorId);
+            var supervisor = repositorioGerentes.GetById(model.SupervisorId);
 
             var analista = new Analista()
             {
@@ -31,27 +26,40 @@ namespace FenaCompleto.Controllers
                 Supervisor = supervisor
             };
 
-            supervisor.Analistas.Add(analista);
-
-            repositorio.Add(analista);
-            repositorio.SaveChanges();
-            return Ok(analista);
+            repositorioAnalistas.Add(analista);
+            repositorioAnalistas.SaveChanges();
+            return Ok();
         }
 
         [HttpGet]
         [Route("listarAnalistas")]
         public IActionResult ListarAnalistas(
-            [FromServices] IAnalista repositorio)
+            [FromServices] IAnalista repositorio,
+            [FromServices] ITecnico repositorioTecnico,
+            [FromServices] IEstagiario repositorioEstagiario)
         {
             var listaAnalista = repositorio.GetAll();
+            var listaTecnico = repositorioTecnico.GetAll();
+            var listaEstagiario = repositorioEstagiario.GetAll();
 
-            var novaLista = listaAnalista.Select(x => new Analista
+            var novaLista = listaAnalista.Select(x => new AnalistaModel
             {
                 Nome = x.Nome,
                 Cargo = x.Cargo,
                 SupervisorId = x.SupervisorId,
-                Estagiarios = x.Estagiarios,
-                Tecnicos = x.Tecnicos
+                Tecnicos = listaTecnico.Select(y => new Tecnico
+                {
+                    Nome = y.Nome,
+                    Cargo = y.Cargo,
+                    SupervisorId = y.SupervisorId
+                }).Where(s => s.SupervisorId == x.Id).ToList(),
+                Estagiarios = listaEstagiario.Select(y => new Estagiario
+                {
+                    Nome = y.Nome,
+                    Cargo = y.Cargo,
+                    SupervisorId = y.SupervisorId
+                }).Where(s => s.SupervisorId == x.Id).ToList(),
+
             }).ToList();
 
             return Ok(novaLista);

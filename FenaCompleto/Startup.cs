@@ -1,4 +1,3 @@
-using Dominio.Entidades;
 using Dominio.Interfaces;
 using Infra.Contextos;
 using Infra.Repositorios;

@@ -24,21 +24,27 @@ namespace FenaCompleto.Controllers
 
             repositorio.Add(gerente);
             repositorio.SaveChanges();
-            return Ok(gerente);
+            return Ok();
         }
 
         [HttpGet]
         [Route("listarGerentes")]
-        public IActionResult ListarGerentes([FromServices] IGerente repositorio)
+        public IActionResult ListarGerentes([FromServices] IGerente repositorio, [FromServices] IAnalista repositorioAnalistas)
         {
             var listaGerentes = repositorio.GetAll();
+            var listaAnalistas = repositorioAnalistas.GetAll();
 
-            var novaLista = listaGerentes.Select(x => new Gerente
+            var novaLista = listaGerentes.Select(x => new GerenteModel
             {
                 Id = x.Id,
                 Nome = x.Nome,
                 Cargo = x.Cargo,
-                Analistas = x.Analistas
+                Analistas = listaAnalistas.Select(y => new AnalistaModel
+                {
+                    Nome = y.Nome,
+                    Cargo = y.Cargo,
+                    SupervisorId = y.SupervisorId
+                }).Where(s => s.SupervisorId == x.Id).ToList()
             }).ToList();
 
             return Ok(novaLista);

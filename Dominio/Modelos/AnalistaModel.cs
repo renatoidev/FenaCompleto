@@ -2,7 +2,6 @@
 using Dominio.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Dominio.Modelos
 {
@@ -13,5 +12,8 @@ namespace Dominio.Modelos
         public string Nome { get; set; }
         public ECargo Cargo { get; set; }
         public Guid SupervisorId { get; set; }
+        public List<Tecnico> Tecnicos { get; set; } = new List<Tecnico>();
+        public List<Estagiario> Estagiarios { get; set; } = new List<Estagiario>();
+
     }
 }
