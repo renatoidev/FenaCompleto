@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 namespace Dominio.Modelos
 {
-    public class GerenteModel
+    public class ListarGerenteModel
     {
-        public GerenteModel() { }
+        public ListarGerenteModel() { }
 
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public ECargo Cargo { get; set; } = ECargo.Gerente;
-        public List<AnalistaModel> Analistas { get; set; } = new List<AnalistaModel>();
+        public List<ListarAnalistaModel> Analistas { get; set; } = new List<ListarAnalistaModel>();
 
     }
 }

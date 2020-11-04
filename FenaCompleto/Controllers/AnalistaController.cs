@@ -2,6 +2,7 @@
 using Dominio.Entidades;
 using Dominio.Interfaces;
 using Dominio.Modelos;
+using Infra.Repositorios;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FenaCompleto.Controllers
@@ -15,7 +16,7 @@ namespace FenaCompleto.Controllers
         public IActionResult CadastrarAnalista(
             [FromServices] IAnalista repositorioAnalistas,
             [FromServices] IGerente repositorioGerentes,
-            [FromBody] AnalistaModel model)
+            [FromBody] CadastrarAnalistaModel model)
         {
             var supervisor = repositorioGerentes.GetById(model.SupervisorId);
 
@@ -42,7 +43,7 @@ namespace FenaCompleto.Controllers
             var listaTecnico = repositorioTecnico.GetAll();
             var listaEstagiario = repositorioEstagiario.GetAll();
 
-            var novaLista = listaAnalista.Select(x => new AnalistaModel
+            var novaLista = listaAnalista.Select(x => new ListarAnalistaModel
             {
                 Nome = x.Nome,
                 Cargo = x.Cargo,

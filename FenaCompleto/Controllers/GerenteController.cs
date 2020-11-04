@@ -14,7 +14,7 @@ namespace FenaCompleto.Controllers
         [Route("cadastrarGerente")]
         public IActionResult CadastrarGerente(
             [FromServices] IGerente repositorio,
-            [FromBody] GerenteModel model)
+            [FromBody] CadastrarGerenteModel model)
         {
             var gerente = new Gerente()
             {
@@ -34,12 +34,12 @@ namespace FenaCompleto.Controllers
             var listaGerentes = repositorio.GetAll();
             var listaAnalistas = repositorioAnalistas.GetAll();
 
-            var novaLista = listaGerentes.Select(x => new GerenteModel
+            var novaLista = listaGerentes.Select(x => new ListarGerenteModel
             {
                 Id = x.Id,
                 Nome = x.Nome,
                 Cargo = x.Cargo,
-                Analistas = listaAnalistas.Select(y => new AnalistaModel
+                Analistas = listaAnalistas.Select(y => new ListarAnalistaModel
                 {
                     Nome = y.Nome,
                     Cargo = y.Cargo,

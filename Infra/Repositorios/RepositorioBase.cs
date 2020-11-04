@@ -1,5 +1,6 @@
 ﻿using Dominio.Entidades;
 using Infra.Contextos;
+using Infra.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -44,5 +45,11 @@ namespace Infra.Repositorios
         {
             throw new NotImplementedException();
         }
+
+        //public List<FuncionarioDTO> GetAllFuncionarios()
+        //{
+        //    var teste = DbSet.ToList();
+        //    return teste;
+        //}
     }
 }

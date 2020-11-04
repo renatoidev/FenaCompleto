@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace Dominio.Modelos
 {
-    public class AnalistaModel
+    public class ListarAnalistaModel
     {
-        public AnalistaModel() { }
+        public ListarAnalistaModel() { }
 
         public string Nome { get; set; }
         public ECargo Cargo { get; set; }

@@ -5,6 +5,5 @@ namespace Dominio.Interfaces
 {
     public interface IAnalista : IRepositorio<Analista>
     {
-        
     }
 }

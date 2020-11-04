@@ -26,6 +26,7 @@ namespace FenaCompleto
             services.AddScoped<IEstagiario, RepositorioEstagiario>();
             services.AddScoped<IGerente, RepositorioGerente>();
             services.AddScoped<ITecnico, RepositorioTecnico>();
+
             services.AddDbContext<Contexto>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
             services.AddControllers();
             services.AddSwaggerGen();

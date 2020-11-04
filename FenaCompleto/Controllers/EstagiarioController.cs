@@ -15,7 +15,7 @@ namespace FenaCompleto.Controllers
         public IActionResult CadastrarEstagiario(
             [FromServices] IEstagiario repositorioEstagiario,
             [FromServices] IAnalista repositorioAnalista,
-            [FromBody] EstagiarioModel model)
+            [FromBody] CadastrarEstagiarioModel model)
         {
             var supervisor = repositorioAnalista.GetById(model.SupervisorId);
 
@@ -40,7 +40,7 @@ namespace FenaCompleto.Controllers
         {
             var listaEstagiario = repositorioEstagiario.GetAll();
 
-            var novaLista = listaEstagiario.Select(x => new EstagiarioModel
+            var novaLista = listaEstagiario.Select(x => new ListarEstagiarioModel
             {
                 Nome = x.Nome,
                 Cargo = x.Cargo,

@@ -16,7 +16,7 @@ namespace FenaCompleto.Controllers
         public IActionResult CadastrarTecnico(
             [FromServices] ITecnico repositorioTecnico,
             [FromServices] IAnalista repositorioAnalista,
-            [FromBody] TecnicoModel model)
+            [FromBody] CadastrarTecnicoModel model)
         {
             var supervisor = repositorioAnalista.GetById(model.SupervisorId);
 
@@ -41,7 +41,7 @@ namespace FenaCompleto.Controllers
         {
             var listaTecnico = repositorioTecnico.GetAll();
 
-            var novaLista = listaTecnico.Select(x => new TecnicoModel
+            var novaLista = listaTecnico.Select(x => new ListarTecnicoModel
             {
                 Nome = x.Nome,
                 Cargo = x.Cargo,
